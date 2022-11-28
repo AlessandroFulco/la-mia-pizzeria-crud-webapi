@@ -3,24 +3,36 @@ using la_mia_pizzeria_static.Models.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Net.Http.Json;
+using System.Xml;
 
 namespace la_mia_pizzeria_static.Controllers.Api
 {
-    [Route("api/[PizzaController]/[all]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class PizzaController : ControllerBase
     {
-        public DbPizzaRepository pizzaRepository;
-        public List<Pizza> Pizze;
+        public IDbPizzaRepository _pizzaRepository;
+        public IDbCategoriesRepository _categoriesRepository;
+        public IDbIngredientsRepository _ingredientsRepository;
 
-        public PizzaController()
+        public PizzaController(IDbPizzaRepository pizzaRepository, IDbCategoriesRepository categoriesRepository, IDbIngredientsRepository ingredientsRepository)
         {
-            pizzaRepository = new DbPizzaRepository();
+            
+
+            _pizzaRepository = pizzaRepository;
+            _categoriesRepository = categoriesRepository;
+            _ingredientsRepository = ingredientsRepository;
         }
 
-        public void Index()
+        public IActionResult Get()
         {
-
+            
+            List<Pizza> list = _pizzaRepository.All();
+             
+            return Ok(list);
         }
         
     }
