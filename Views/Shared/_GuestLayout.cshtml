@@ -6,13 +6,12 @@
     <title>@ViewData["title"] - il_mio_primo_blog</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/la-mia-pizzeria-static.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">il_mio_primo_blog</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Guest" asp-action="Index">La Nostra Pizzeria</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,8 +26,19 @@
             </div>
         </nav>
     </header>
+
+    @*Jumbo*@
+    <jumbotron class="jumbotron jumbotron-fluid px-0">
+        <div class="card border-0 bg-dark text-white">
+            <img class="card-img" src="https://img.pizza/900/400" alt="Card image">
+            <div class="card-img-overlay d-flex justify-content-center align-items-center">
+                <h1 class="card-title bg-light bg-gradient rounded-pill text-black fs-1 my-2 px-4" style="--bs-bg-opacity: .4">La Nostra Pizzeria</h1>
+            </div>
+        </div>
+    </jumbotron>
     <div class="container">
-        <main role="main" class="pb-3">
+        
+        <main role="main" class="pb-3 mt-4">
             @RenderBody()
         </main>
     </div>
