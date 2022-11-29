@@ -70,5 +70,15 @@ namespace la_mia_pizzeria_static.Models.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public List<Pizza> SearchByName(string? name)
+        {
+            IQueryable<Pizza> query = db.Pizze.Where(pizza => pizza.Name == name);
+
+            if (name == null)
+                return query.ToList();
+
+            return query.ToList();
+        }
     }
 }

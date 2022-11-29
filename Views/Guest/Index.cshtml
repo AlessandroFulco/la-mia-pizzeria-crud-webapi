@@ -2,9 +2,14 @@
     Layout = "_GuestLayout";
 }
 
-<h2 class=" border-bottom">
-    Menù
-</h2>
+<div>
+    <div class="input-group mb-3">
+        <input id="user_search" type="text" class="js_search form-control" />
+    </div>
+    <h2 class=" border-bottom">
+        Menù
+    </h2>
+</div>
 
 <div class="row js_no_post text-center d-none">
     <div class="col-12">
@@ -19,33 +24,65 @@
 
 <script type="text/javascript">
 
+    
+
     axios.get('/api/pizza/get').then(res => {
-        if (res.data.length == 0) {
+        RenderMenu(res.data);
+    }).catch(error => {
+        conosle.log(error);
+    })
+
+
+
+
+
+
+
+
+
+    function RenderMenu(data) {
+        if (data.length == 0) {
             document.querySelector('.js_no_post').classList.remove('d-none');
             document.querySelector('.js_post_table').classList.add('d-none');
         } else {
             document.querySelector('.js_post_table').classList.remove('d-none');
             document.querySelector('.js_no_post').classList.add('d-none');
             document.querySelector('.js_post_table').innerHTML = '';
-            res.data.forEach(pizza => {
+            data.forEach(pizza => {
                 console.log('pizza', pizza);
                 document.querySelector('.js_post_table').innerHTML +=
-                    `
-                        <div class="col-12 col-md-4 p-2">
-                            <div class="card post h-100">
-                                    <img src="${pizza.photo}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">${pizza.name}</h5>
-                                    <p class="card-text">${pizza.description}</p>
-                                        <strong class="card-text">${pizza.price}</strong>
-                                </div>
+                `
+                    <div class="col-12 col-md-4 p-2">
+                        <div class="card post h-100">
+                                <img src="${pizza.photo}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">${pizza.name}</h5>
+                                <p class="card-text">${pizza.description}</p>
+                                    <strong class="card-text">${pizza.price}</strong>
                             </div>
                         </div>
-                    `;
+                    </div>
+                `;
             });
         }
-    }).catch(error => {
-        conosle.log(error);
-    })
+        
+    };
+
+    document.querySelector(".js_search").addEventListener('keyup', OnUserInput);
+    
+    //function OnUserInput(e){
+    //    console.log(e);
+
+    //    let query = e.target.value;
+
+    //    axios.get('/api/pizza/search', {
+    //        params: {
+    //            name: query;
+    //        }
+    //    }).then(response => {
+    //        RenderMenu(response.data);
+    //    })
+
+    //}
 
 </script>

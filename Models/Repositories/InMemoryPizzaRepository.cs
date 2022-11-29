@@ -62,5 +62,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public List<Pizza> SearchByName(string? name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
