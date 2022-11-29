@@ -20,72 +20,76 @@
     <!-- qui verranno mostrati gli elementi -->
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+@section Scripts{
 
-<script type="text/javascript">
+
+    <script type="text/javascript">
 
     
 
-    axios.get('/api/pizza/get').then(res => {
-        RenderMenu(res.data);
-    }).catch(error => {
-        conosle.log(error);
-    })
-
-
-
-
-
-
-
-
-
-    function RenderMenu(data) {
-        if (data.length == 0) {
-            document.querySelector('.js_no_post').classList.remove('d-none');
-            document.querySelector('.js_post_table').classList.add('d-none');
-        } else {
-            document.querySelector('.js_post_table').classList.remove('d-none');
-            document.querySelector('.js_no_post').classList.add('d-none');
-            document.querySelector('.js_post_table').innerHTML = '';
-            data.forEach(pizza => {
-                console.log('pizza', pizza);
-                document.querySelector('.js_post_table').innerHTML +=
-                `
-                    <div class="col-12 col-md-4 p-2">
-                        <div class="card post h-100">
-                                <img src="${pizza.photo}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">${pizza.name}</h5>
-                                <p class="card-text">${pizza.description}</p>
-                                    <strong class="card-text">${pizza.price}</strong>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-        
-    }
-
-    document.querySelector(".js_search").addEventListener('keyup', OnUserInput);
-    
-    function OnUserInput(e){
-        console.log(e);
-
-        let query = e.target.value;
-
-        axios.get('/api/pizza/search', {
-            params: {
-                name: query
-            }
-        }).then(response => {
-            console.log(response.data);
-            RenderMenu(response.data);
+        axios.get('/api/pizza/get').then(res => {
+            RenderMenu(res.data);
         }).catch(error => {
-            console.log(error);
+            conosle.log(error);
         })
 
-    }
 
-</script>
+
+
+
+
+
+
+
+        function RenderMenu(data) {
+            if (data.length == 0) {
+                document.querySelector('.js_no_post').classList.remove('d-none');
+                document.querySelector('.js_post_table').classList.add('d-none');
+            } else {
+                document.querySelector('.js_post_table').classList.remove('d-none');
+                document.querySelector('.js_no_post').classList.add('d-none');
+                document.querySelector('.js_post_table').innerHTML = '';
+                data.forEach(pizza => {
+                    console.log('pizza', pizza);
+                    document.querySelector('.js_post_table').innerHTML +=
+                    `
+                        <a href="/Guest/Details/${pizza.id}">
+                            <div class="col-12 col-md-4 p-2">
+                                <div class="card post h-100">
+                                        <img src="${pizza.photo}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${pizza.name}</h5>
+                                        <p class="card-text">${pizza.description}</p>
+                                            <strong class="card-text">${pizza.price}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                });
+            }
+        
+        }
+
+        document.querySelector(".js_search").addEventListener('keyup', OnUserInput);
+    
+        function OnUserInput(e){
+            console.log(e);
+
+            let query = e.target.value;
+
+            axios.get('/api/pizza/search', {
+                params: {
+                    name: query
+                }
+            }).then(response => {
+                console.log(response.data);
+                RenderMenu(response.data);
+            }).catch(error => {
+                console.log(error);
+            })
+
+        }
+
+    </script>
+}
