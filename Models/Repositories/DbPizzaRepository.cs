@@ -73,12 +73,12 @@ namespace la_mia_pizzeria_static.Models.Repositories
 
         public List<Pizza> SearchByName(string? name)
         {
-            IQueryable<Pizza> query = db.Pizze.Where(pizza => pizza.Name == name);
+            IQueryable<Pizza> query = db.Pizze.Include("Category").Include("Ingredients");
 
             if (name == null)
                 return query.ToList();
 
-            return query.ToList();
+            return query.Where( pizza => pizza.Name.ToLower().Contains(name.ToLower())).ToList();
         }
     }
 }

@@ -66,23 +66,26 @@
             });
         }
         
-    };
+    }
 
     document.querySelector(".js_search").addEventListener('keyup', OnUserInput);
     
-    //function OnUserInput(e){
-    //    console.log(e);
+    function OnUserInput(e){
+        console.log(e);
 
-    //    let query = e.target.value;
+        let query = e.target.value;
 
-    //    axios.get('/api/pizza/search', {
-    //        params: {
-    //            name: query;
-    //        }
-    //    }).then(response => {
-    //        RenderMenu(response.data);
-    //    })
+        axios.get('/api/pizza/search', {
+            params: {
+                name: query
+            }
+        }).then(response => {
+            console.log(response.data);
+            RenderMenu(response.data);
+        }).catch(error => {
+            console.log(error);
+        })
 
-    //}
+    }
 
 </script>
