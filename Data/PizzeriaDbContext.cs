@@ -17,14 +17,15 @@ namespace la_mia_pizzeria_static.Data
             }
         }
         public static PizzeriaDbContext _instance;
-        private PizzeriaDbContext()
+        public PizzeriaDbContext()
         {
 
         }
-        
+
         public DbSet<Pizza> Pizze { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Message> Messages{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

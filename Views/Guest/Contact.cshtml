@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "_GuestLayout";
+}
+
+<h1>
+    Contact
+</h1>
+
+<form>
+    @*email*@
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email">
+    </div>
+    @*name*@
+    <div class="mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <input type="text" class="form-control" id="name">
+    </div>
+    @*title*@
+    <div class="mb-3">
+        <label for="title" class="form-label">Titolo:</label>
+        <input type="text" class="form-control" id="title">
+    </div>
+    @*text*@
+    <div class="mb-3">
+        <label for="text" class="form-label">Testo:</label>
+        <textarea id="text" class="form-control" rows="5"></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Invia</button>
+</form>
