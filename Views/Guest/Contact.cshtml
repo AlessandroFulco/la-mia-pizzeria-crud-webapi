@@ -6,7 +6,7 @@
     Contact
 </h1>
 
-<form onsubmit="Submit(e)">
+<form onsubmit="inviaMessaggio(event)">
     @*email*@
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
@@ -28,18 +28,35 @@
         <textarea id="text" class="form-control" rows="5"></textarea>
     </div>
     
-    <button type="submit" class="btn btn-primary">Invia</button>
+    <button type="submit" value="submit" class="btn btn-primary">Invia</button>
 </form>
 
 @section Scripts {
 
     <script type="text/javascript">
-        
-        function Submit(e){
+
+        function inviaMessaggio(e) {
+            console.log("avviata");
+
+            const email = document.querySelector('#email').value;
+            const name = document.querySelector('#name').value;
+            const title = document.querySelector('#title').value;
+            const text = document.querySelector('#text').value;
+
             e.preventDefault();
-
-
-
+            axios.post('/api/message', {
+                email: email,
+                name: name,
+                title: title,
+                text: text,
+            }).then(res => {
+                console.log("riuscita");
+                title = '';
+                text = '';
+            }).catch(error => {
+                console.log("errore");
+                console.log(error);
+            })
         }
         
     </script>

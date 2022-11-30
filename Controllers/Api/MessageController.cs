@@ -9,7 +9,7 @@ namespace la_mia_pizzeria_static.Controllers.Api
     [ApiController]
     public class MessageController : ControllerBase
     {
-        private PizzeriaDbContext db;
+        public PizzeriaDbContext db;
         
         public MessageController(PizzeriaDbContext _db)
         {
@@ -17,7 +17,7 @@ namespace la_mia_pizzeria_static.Controllers.Api
         }
 
         [HttpPost]
-        public IActionResult Contact([FromBody] Message message)
+        public IActionResult Create([FromBody] Message message)
         {
             try
             {

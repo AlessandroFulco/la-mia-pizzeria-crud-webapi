@@ -12,8 +12,8 @@ using la_mia_pizzeria_static.Data;
 namespace lamiapizzeriastatic.Migrations
 {
     [DbContext(typeof(PizzeriaDbContext))]
-    [Migration("20221130124601_MessageModels2")]
-    partial class MessageModels2
+    [Migration("20221130143437_MessageModelsTable")]
+    partial class MessageModelsTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,8 +77,11 @@ namespace lamiapizzeriastatic.Migrations
 
             modelBuilder.Entity("la_mia_pizzeria_static.Models.Message", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
