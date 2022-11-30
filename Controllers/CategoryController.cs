@@ -9,10 +9,10 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class CategoryController : Controller
     {
-        public PizzeriaDbContext db = PizzeriaDbContext.Instance;
-        public CategoryController()
+        public PizzeriaDbContext db;
+        public CategoryController(PizzeriaDbContext _pizzeriaRepository)
         {
-
+            db = _pizzeriaRepository;
         } 
         public IActionResult Index()
         {

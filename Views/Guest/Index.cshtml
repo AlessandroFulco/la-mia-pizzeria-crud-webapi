@@ -3,9 +3,19 @@
 }
 
 <div>
+    <label for="user_search">Nome Pizza:</label>
     <div class="input-group mb-3">
-        <input id="user_search" type="text" class="js_search form-control" />
+        <input id="user_search" type="text" placeholder="Cerca la tua pizza qui..." class="js_search form-control" />
     </div>
+
+@*    <label for="user_category_search">Nome Categoria:</label>
+    <div class="input-group mb-3">
+        <select class="user_select form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <option selected>Open this select menu</option>
+            
+        </select>
+    </div>*@
+
     <h2 class=" border-bottom">
         Menù
     </h2>
@@ -26,14 +36,17 @@
     <script type="text/javascript">
 
     
-
+        //menu pizze
         axios.get('/api/pizza/get').then(res => {
             RenderMenu(res.data);
         }).catch(error => {
             conosle.log(error);
         })
 
-
+        //lista categorie
+        //axios.get('/api/pizza/getCategories').then(ciao => {
+        //    console.log(ciao.data);
+        //});
 
 
 
@@ -53,8 +66,8 @@
                     console.log('pizza', pizza);
                     document.querySelector('.js_post_table').innerHTML +=
                     `
-                        <a href="/Guest/Details/${pizza.id}">
-                            <div class="col-12 col-md-4 p-2">
+                        <div class="col-4 col-md-4 p-2">
+                            <a href="/Guest/Details/${pizza.id}">
                                 <div class="card post h-100">
                                         <img src="${pizza.photo}" class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -63,8 +76,8 @@
                                             <strong class="card-text">${pizza.price}</strong>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     `;
                 });
             }

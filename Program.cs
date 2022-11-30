@@ -1,16 +1,18 @@
+using la_mia_pizzeria_static.Data;
 using la_mia_pizzeria_static.Models.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<PizzeriaDbContext>();
+
 //builder.Services.AddScoped<IDbPizzaRepository, InMemoryPizzaRepository>();
 //builder.Services.AddScoped<IDbCategoriesRepository, InMemoryCateogoryRepository>();
 //builder.Services.AddScoped<IDbIngredientsRepository, InMemoryIngredientRepository>();
-builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
-builder.Services.AddScoped<IDbCategoriesRepository, DbCategoriesRepository>();
-builder.Services.AddScoped<IDbIngredientsRepository, DbIngredientsRepository>();
-
+//builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
+//builder.Services.AddScoped<IDbCategoriesRepository, DbCategoriesRepository>();
+//builder.Services.AddScoped<IDbIngredientsRepository, DbIngredientsRepository>();
 
 //ignora i cicli
 builder.Services.AddControllers().AddJsonOptions(options =>

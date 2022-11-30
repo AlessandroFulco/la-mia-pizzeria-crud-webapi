@@ -6,10 +6,10 @@ namespace la_mia_pizzeria_static.Controllers
 {
     public class IngredientController : Controller
     {
-        public PizzeriaDbContext db = PizzeriaDbContext.Instance;
-        public IngredientController() : base()
+        public PizzeriaDbContext db;
+        public IngredientController(PizzeriaDbContext _pizzeriaDbContext) : base()
         {
-
+            db = _pizzeriaDbContext;
         }
 
 

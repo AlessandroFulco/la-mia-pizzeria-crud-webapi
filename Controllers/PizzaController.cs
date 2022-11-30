@@ -21,11 +21,11 @@ namespace la_mia_pizzeria_static.Controllers
 
 
         //public PizzaController(IDbPizzaRepository _pizzaRepository, IDbIngredientsRepository _ingredientsRepository, IDbCategoriesRepository _categoriesRepository) : base()
-        public PizzaController() : base()
+        public PizzaController(DbPizzaRepository _pizzaRepository, DbIngredientsRepository _ingredientsRepository, DbCategoriesRepository _categoriesRepository) : base()
         {
-            pizzaRepository = new DbPizzaRepository();
-            ingredientsRepository = new DbIngredientsRepository();
-            categoriesRepository = new DbCategoriesRepository();
+            pizzaRepository = _pizzaRepository;
+            ingredientsRepository = _ingredientsRepository;
+            categoriesRepository = _categoriesRepository;
 
             //pizzaRepository = _pizzaRepository;
             //ingredientsRepository = _ingredientsRepository;

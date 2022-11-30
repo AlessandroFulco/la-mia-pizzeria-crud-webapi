@@ -14,17 +14,11 @@ namespace la_mia_pizzeria_static.Controllers.Api
     [ApiController]
     public class PizzaController : ControllerBase
     {
-        public IDbPizzaRepository _pizzaRepository;
-        public IDbCategoriesRepository _categoriesRepository;
-        public IDbIngredientsRepository _ingredientsRepository;
+        IDbPizzaRepository _pizzaRepository;
 
-        public PizzaController(IDbPizzaRepository pizzaRepository, IDbCategoriesRepository categoriesRepository, IDbIngredientsRepository ingredientsRepository)
+        public PizzaController(IDbPizzaRepository pizzaRepository)
         {
-            
-
             _pizzaRepository = pizzaRepository;
-            _categoriesRepository = categoriesRepository;
-            _ingredientsRepository = ingredientsRepository;
         }
 
         public IActionResult Get()
@@ -35,7 +29,7 @@ namespace la_mia_pizzeria_static.Controllers.Api
             return Ok(list);
         }
 
-        public IActionResult Search(string? name)
+        public IActionResult SearchByName(string? name)
         {
             List<Pizza> list = _pizzaRepository.SearchByName(name);
 
@@ -48,6 +42,12 @@ namespace la_mia_pizzeria_static.Controllers.Api
             Pizza pizza = _pizzaRepository.GetById(id);
             return Ok(pizza);
         }
+
+        //public IActionResult getCategories()
+        //{
+        //    List<Category> list = _categoriesRepository.All();
+        //    return Ok(list);
+        //}
         
     }
 }
