@@ -6,7 +6,7 @@
     Contact
 </h1>
 
-<form>
+<form onsubmit="Submit(e)">
     @*email*@
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
@@ -30,3 +30,18 @@
     
     <button type="submit" class="btn btn-primary">Invia</button>
 </form>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        
+        function Submit(e){
+            e.preventDefault();
+
+
+
+        }
+        
+    </script>
+
+}
