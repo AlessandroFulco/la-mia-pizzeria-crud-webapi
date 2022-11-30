@@ -14,8 +14,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
 });
 
-builder.Services.AddDbContext<PizzeriaDbContext>();
-
 //builder.Services.AddScoped<IDbPizzaRepository, InMemoryPizzaRepository>();
 //builder.Services.AddScoped<IDbCategoriesRepository, InMemoryCateogoryRepository>();
 //builder.Services.AddScoped<IDbIngredientsRepository, InMemoryIngredientRepository>();
