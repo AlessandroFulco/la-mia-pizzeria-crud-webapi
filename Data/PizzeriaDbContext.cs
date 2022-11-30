@@ -21,6 +21,10 @@ namespace la_mia_pizzeria_static.Data
         //{
 
         //}
+        public PizzeriaDbContext()
+        {
+
+        }  
 
         public DbSet<Pizza> Pizze { get; set; }
         public DbSet<Category> Categories { get; set; }

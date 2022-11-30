@@ -5,14 +5,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<PizzeriaDbContext>();
 
-//builder.Services.AddScoped<IDbPizzaRepository, InMemoryPizzaRepository>();
-//builder.Services.AddScoped<IDbCategoriesRepository, InMemoryCateogoryRepository>();
-//builder.Services.AddScoped<IDbIngredientsRepository, InMemoryIngredientRepository>();
-//builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
-//builder.Services.AddScoped<IDbCategoriesRepository, DbCategoriesRepository>();
-//builder.Services.AddScoped<IDbIngredientsRepository, DbIngredientsRepository>();
 
 //ignora i cicli
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -20,6 +13,16 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     options.JsonSerializerOptions.WriteIndented = true;
 });
+
+builder.Services.AddDbContext<PizzeriaDbContext>();
+
+//builder.Services.AddScoped<IDbPizzaRepository, InMemoryPizzaRepository>();
+//builder.Services.AddScoped<IDbCategoriesRepository, InMemoryCateogoryRepository>();
+//builder.Services.AddScoped<IDbIngredientsRepository, InMemoryIngredientRepository>();
+builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
+builder.Services.AddScoped<IDbCategoriesRepository, DbCategoriesRepository>();
+builder.Services.AddScoped<IDbIngredientsRepository, DbIngredientsRepository>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
