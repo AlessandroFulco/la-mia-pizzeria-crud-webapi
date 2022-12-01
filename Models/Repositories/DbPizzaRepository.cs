@@ -6,9 +6,15 @@ namespace la_mia_pizzeria_static.Models.Repositories
 {
     public class DbPizzaRepository : IDbPizzaRepository
     {
-        private PizzeriaDbContext db = PizzeriaDbContext.Instance;
-        private DbIngredientsRepository ingredientsRepository;
-        
+        //private PizzeriaDbContext db = PizzeriaDbContext.Instance;
+        //private DbIngredientsRepository ingredientsRepository;
+        private PizzeriaDbContext db;
+        public IDbIngredientsRepository ingredientsRepository;
+        public DbPizzaRepository(PizzeriaDbContext _db, IDbIngredientsRepository _ingredientsRepository)
+        {
+            db = _db;
+            ingredientsRepository = _ingredientsRepository;
+        }
 
         public List<Pizza> All()
         {

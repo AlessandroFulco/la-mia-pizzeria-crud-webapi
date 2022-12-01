@@ -2,9 +2,15 @@ using la_mia_pizzeria_static.Data;
 using la_mia_pizzeria_static.Models.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("PizzeriaDbContextConnection"); 
+    builder.Services.AddDbContext<PizzeriaDbContext>(options => options.UseSqlServer(connectionString)); 
+    builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<PizzeriaDbContext>();
 
 
 //ignora i cicli
@@ -14,11 +20,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
 });
 
-builder.Services.AddDbContext<PizzeriaDbContext>();
-
 //builder.Services.AddScoped<IDbPizzaRepository, InMemoryPizzaRepository>();
 //builder.Services.AddScoped<IDbCategoriesRepository, InMemoryCateogoryRepository>();
 //builder.Services.AddScoped<IDbIngredientsRepository, InMemoryIngredientRepository>();
+//builder.Services.AddDbContext<PizzeriaDbContext>();
 builder.Services.AddScoped<IDbPizzaRepository, DbPizzaRepository>();
 builder.Services.AddScoped<IDbCategoriesRepository, DbCategoriesRepository>();
 builder.Services.AddScoped<IDbIngredientsRepository, DbIngredientsRepository>();
@@ -43,8 +48,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

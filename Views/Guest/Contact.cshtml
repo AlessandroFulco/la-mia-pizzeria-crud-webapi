@@ -11,21 +11,30 @@
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
         <input type="email" class="form-control" id="email">
+        <div id="error-email">
+
+        </div>
     </div>
     @*name*@
     <div class="mb-3">
         <label for="name" class="form-label">Nome:</label>
         <input type="text" class="form-control" id="name">
+        <div id="error-name">
+        </div>
     </div>
     @*title*@
     <div class="mb-3">
         <label for="title" class="form-label">Titolo:</label>
         <input type="text" class="form-control" id="title">
+        <div id="error-title">
+        </div>
     </div>
     @*text*@
     <div class="mb-3">
         <label for="text" class="form-label">Testo:</label>
         <textarea id="text" class="form-control" rows="5"></textarea>
+        <div id="error-text">
+        </div>
     </div>
     
     <button type="submit" value="submit" class="btn btn-primary">Invia</button>
@@ -36,26 +45,43 @@
     <script type="text/javascript">
 
         function inviaMessaggio(e) {
-            console.log("avviata");
+            //console.log("avviata");
 
-            const email = document.querySelector('#email').value;
-            const name = document.querySelector('#name').value;
-            const title = document.querySelector('#title').value;
-            const text = document.querySelector('#text').value;
+            //input
+            const emailUser = document.querySelector('#email');
+            const nameUser = document.querySelector('#name');
+            const titleUser = document.querySelector('#title');
+            const textUser = document.querySelector('#text');
 
             e.preventDefault();
+            
             axios.post('/api/message', {
-                email: email,
-                name: name,
-                title: title,
-                text: text,
+                email: emailUser.value,
+                name: nameUser.value,
+                title: titleUser.value,
+                text: textUser.value,
             }).then(res => {
-                console.log("riuscita");
-                title = '';
-                text = '';
+                //console.log("riuscita");
+
+                swal("messaggio inserito correttamente", "success");
+
+                emailUser.value = '';
+                nameUser.value = '';
+                titleUser.value = '';
+                textUser.value = '';
             }).catch(error => {
-                console.log("errore");
-                console.log(error);
+                let errors = "";
+
+                const keys = Object.keys(error.response.data.errors);
+
+                keys.forEach(key => {
+                    const item = error.response.data.errors[key];
+                    item.forEach(error => {
+                        errors += error + "\n ";
+                    })
+                });
+
+                swal("Errore", errors, "error", { button: "close" });
             })
         }
         
