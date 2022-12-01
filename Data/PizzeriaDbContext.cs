@@ -8,25 +8,9 @@ namespace la_mia_pizzeria_static.Data
 {
     public class PizzeriaDbContext : IdentityDbContext<IdentityUser>
     {
-        //public static PizzeriaDbContext Instance
-        //{
-        //    get
-        //    {
-        //        if (_instance == null)
-        //        {
-        //            _instance = new PizzeriaDbContext();
-        //        }
-        //        return _instance;
-        //    }
-        //}
-        public static PizzeriaDbContext _instance;
-
-        public PizzeriaDbContext(DbContextOptions<PizzeriaDbContext> options)
-        : base(options)
+        public PizzeriaDbContext(DbContextOptions<PizzeriaDbContext> options) : base(options)
         {
         }
-
-        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,12 +24,6 @@ namespace la_mia_pizzeria_static.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Message> Messages{ get; set; }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-
-        //    optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=la_mia_pizzeria;Integrated Security=True;Encrypt=false;");
-
-        //}
+        public DbSet<Comment> Comments { get; set; }
     }
 }

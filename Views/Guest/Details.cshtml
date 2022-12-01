@@ -12,7 +12,37 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <h3>
+                Comment:
+            </h3>
+            <div>
+                <form onsubmit="inviaCommento(event)">
+                    @*name*@
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome:</label>
+                        <input type="text" class="form-control" id="name">
+                        <div id="error-name">
+                        </div>
+                    </div>
+                    
+                    @*text*@
+                    <div class="mb-3">
+                        <label for="text" class="form-label">Testo:</label>
+                        <textarea id="text" class="form-control" rows="5"></textarea>
+                        <div id="error-text">
+                        </div>
+                    </div>
+
+                    <button type="submit" value="submit" class="btn btn-primary">Invia</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 
 @section Scripts{
@@ -40,5 +70,40 @@
                     </div>
                 `;
         }).catch(error => console.log(error))
+
+        function inviaMessaggio(e) {
+            //console.log("avviata");
+
+            //input
+            const nameUser = document.querySelector('#name');
+            const textUser = document.querySelector('#text');
+
+            e.preventDefault();
+
+            axios.post('/api/comment/create', {
+                name: nameUser.value,
+                text: textUser.value,
+            }).then(res => {
+                //console.log("riuscita");
+
+                swal("messaggio inserito correttamente", "success");
+
+                nameUser.value = '';
+                textUser.value = '';
+            }).catch(error => {
+                let errors = "";
+
+                const keys = Object.keys(error.response.data.errors);
+
+                keys.forEach(key => {
+                    const item = error.response.data.errors[key];
+                    item.forEach(error => {
+                        errors += error + "\n ";
+                    })
+                });
+
+                swal("Errore", errors, "error", { button: "close" });
+            })
+        }
     </script>
 }
